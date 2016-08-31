@@ -3,32 +3,38 @@ envmgr - Environment Manager
 
 ``envmgr`` is a simple wrapper for creating a python virtual environment using
 ``virtualenv``. In addition it creates a local ``autoenv`` file that contains
-a sourcing commands for said virtual environment. On top of that it can then
-automatically install a set of default tools over ``pip`` from your newly
-installed virtual environment, without activating it.
+a sourcing commands for said virtual environment. Lastly it will automatically
+install a suite of default tools over ``pip`` from your newly installed virtual
+environment, without activating it.
 
 Obviously, all of this can be done by hand, but the idea is to simplify the
-process that you keep doing every time, include installing default tools that
-you normally always use. (In my case that entails ``ipython``, ``pylint`` and
-``pydocstyle``.)
+process that you keep doing many times. This includes installing default tools
+that you normally always want to have in an virtual environment. (In my case
+that entails ``ipython``, ``pylint`` and ``pydocstyle``.)
 
 Installation
 ------------
 
-To install, just run::
+To install, just run the following outside of any virtual environment::
 
     python setup.py install
 
 This will install the dependencies ``virtualenv`` and ``autoenv``. The latter
 has to be activated (as normal) by running something like::
 
-    echo "source ``which activate.sh``" >> ~/.bashrc
+    echo "source `which activate.sh`" >> ~/.bashrc
 
 or if on a mac::
 
-    echo "source ``which activate.sh``" >> ~/.bash_profile
+    echo "source `which activate.sh`" >> ~/.bash_profile
 
-The script is designed only to work on Linux and Mac.
+``envmgr`` will install environments, but by default will not activate them. If
+you want it to also handle activation, by adding a trigger for ``autoenv``::
+
+    echo "alias envmgr=\"envmgr && autoenv_init\"" >> ~/.bash_aliases
+
+(This assumes that ``.bashrc``/``.bash_profile`` somehow sources the content of
+``.bash_aliases``.)
 
 Usage
 -----
