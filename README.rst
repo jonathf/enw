@@ -53,8 +53,9 @@ adding a positional version number. For example::
 
 By default, the wrapper do not reinstall the virtual environment. This implies
 that ``envmgr`` can be used to quickly switching between different versions of
-Python. It does this by rewriting the content of ``.env`` file.
+Python. It does this by editing the content of ``.env`` file. It does so as
+best as it can such that any user generated content stays intact.
 
-If however, you do want to reinstall an environment, this is also possible::
+If however, you *do* want to reinstall an environment, this is also possible::
 
     envmgr -f 2.7
