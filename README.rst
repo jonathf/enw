@@ -1,21 +1,26 @@
-envmgr - Environment Manager
-----------------------------
+``envmgr`` - Environment Manager
+================================
 
-``envmgr`` is a simple wrapper for creating a python virtual environment using
-``virtualenv``. In addition it creates a local ``autoenv`` file that contains
-a sourcing commands for said virtual environment. Lastly it will automatically
-install a suite of default tools over ``pip`` from your newly installed virtual
-environment, without activating it.
+``envmgr`` is a wrapper tool for quick creation and switching between different
+python virtual environments. In particular it allows for:
+
+* Quick creation of new environments using ``virtualenv``.
+* Automatic linking of said environment ``autoenv``, but without destroying local autoenv directives.
+* Quick switching between python installation.
+* Auto pip installation of programs that you know you want in all new environments (like e.g. ``ipython``).
+* Quick reinstallations.
 
 Obviously, all of this can be done by hand, but the idea is to simplify the
-process that you keep doing many times. This includes installing default tools
-that you normally always want to have in an virtual environment. (In my case
-that entails ``ipython``, ``pylint`` and ``pydocstyle``.)
+process that you keep doing many times, and do so in a way that is tractable.
+
+Note that the core functionality of ``envmgr`` adds and replaces what python to
+source in ``.env`` files. It does so carefully so that other content that you
+may have added to the file is not affect.
 
 Installation
 ------------
 
-To install, just run the following outside of any virtual environment::
+To install, run the following outside of any virtual environment::
 
     python setup.py install
 
@@ -29,39 +34,41 @@ or if on a mac::
     echo "source `which activate.sh`" >> ~/.bash_profile
 
 ``envmgr`` will install environments, but by default will not activate them. If
-you want it to also handle activation, by adding a trigger for ``autoenv``::
+you want it to also handle activation, you need to add a trigger for
+``autoenv`` like so::
 
     echo "alias envmgr=\"envmgr && autoenv_init\"" >> ~/.bash_aliases
 
-(This assumes that ``.bashrc``/``.bash_profile`` somehow sources the content of
-``.bash_aliases``.)
+(Make sure that ``.bashrc``/``.bash_profile`` sources the content of
+``.bash_aliases`` for this to work.)
 
 Usage
 -----
 
-For basic usage, just run the basic wrapper::
+For basic usage, run the basic wrapper::
 
     envmgr
 
 It will create a virtual environment (which default to ``python3``) under the
-folder name ``.py3``. Sourcing of the file ``.py3/bin/activate`` will be placed
-in a file ``.env``. This will activate the environment everytime you enter the
-folder or one of its subfolders.
+folder name ``.py3``. A line sourcing of the file ``.py3/bin/activate`` will be
+placed in a file ``.env``. This will activate the environment everytime you
+enter the folder or one of its subfolders.
 
 In addition, the script will look for the file ``~/.envmgrrc``. It will read
-this file and install its content using ``pip install -r`` as if it
-was a ``requirements.txt`` file using the newly installed virtual environment.
+this file and install its content using ``pip install -r``, using the newly
+installed virtual environment.
 
 If you want to use another python version, this is possible by
 adding a positional version number. For example::
 
     envmgr 2.7
 
-By default, the wrapper do not reinstall the virtual environment. This implies
-that ``envmgr`` can be used to quickly switching between different versions of
-Python. It does this by editing the content of ``.env`` file. It does so as
-best as it can such that any user generated content stays intact.
+It will then repeat the whole process, but with the folder ``.py27``.
 
-If however, you *do* want to reinstall an environment, this is also possible::
+To switch back to Python 3 setup, just run::
+
+    envmgr 3
+
+If you *do* want to reinstall an environment, this is also possible::
 
     envmgr -f 2.7
