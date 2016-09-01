@@ -13,7 +13,10 @@ setup(
     version="0.1",
     packages=find_packages(),
     entry_points={
-        'console_scripts': ['enw = enw.__main__:main']},
+        'console_scripts': [
+            'enw = enw.__main__:main',
+            'envwrap = enw.__main__:main',
+        ]},
     install_requires=[
         "virtualenv", "autoenv"
     ],
