@@ -18,7 +18,7 @@ setup(
             'envwrap = enw.__main__:main',
         ]},
     install_requires=[
-        "virtualenv", "autoenv"
+        "virtualenv", "autoenv", "argcomplete"
     ],
     classifiers=[
         'Development Status :: 4 - Beta',

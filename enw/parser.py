@@ -5,6 +5,7 @@ import sys
 import os
 import shutil
 import argparse
+import argcomplete
 import re
 
 RCFILE = os.path.join(os.path.expanduser("~"), ".enwrc")
@@ -126,5 +127,6 @@ def run_command(args):
 
     parser = argparse.ArgumentParser(description="enw")
     set_args(parser)
+    argcomplete.autocomplete(parser)
     args = parser.parse_args(args)
     args.func(**vars(args))
