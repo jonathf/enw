@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
 Simple script for quick install of virtual environment that places under
-autoenv and initiate a default installation from `.envmgrrc`.
+autoenv and initiate a default installation from `.enwrc`.
 """
 
 import sys
@@ -9,11 +9,11 @@ import os
 from setuptools import setup, find_packages
 
 setup(
-    name="envmgr",
+    name="enw",
     version="0.1",
     packages=find_packages(),
     entry_points={
-        'console_scripts': ['envmgr = envmgr.__main__:main']},
+        'console_scripts': ['enw = enw.__main__:main']},
     install_requires=[
         "virtualenv", "autoenv"
     ],
@@ -31,5 +31,5 @@ setup(
     author="Jonathan Feinberg",
     auther_email="jonathf@gmail.com",
     license="GPL3",
-    url="https://github.com/jonathf/envmgr",
+    url="https://github.com/jonathf/enw",
 )

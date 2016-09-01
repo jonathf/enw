@@ -7,7 +7,7 @@ import shutil
 import argparse
 import re
 
-RCFILE = os.path.join(os.path.expanduser("~"), ".envmgrrc")
+RCFILE = os.path.join(os.path.expanduser("~"), ".enwrc")
 
 
 def adjust_autoenv(pypath):
@@ -42,7 +42,7 @@ def adjust_autoenv(pypath):
 
 def pip_install(pypath):
     """
-    Pip install default programs from `.envmgrrc` file if it exists.
+    Pip install default programs from `.enwrc` file if it exists.
 
     Args:
         pypath (str) : path to the python virtual enviroment folder.
@@ -66,7 +66,7 @@ def run_args(version=3, force=False, install_pip=False, **kwargs):
     Args:
         version (int, float) : The python version number to one decimal.
         force (bool) : Override old python enviroment if exist.
-        install_pip (bool) : Install programs with pip from `~/.envmgrrc`.
+        install_pip (bool) : Install programs with pip from `~/.enwrc`.
     """
     # run outside env:
     if os.environ.get("VIRTUAL_ENV", ""):
@@ -83,7 +83,9 @@ def run_args(version=3, force=False, install_pip=False, **kwargs):
         shutil.rmtree(pypath)
 
     if not os.path.isdir(pypath):
-        os.system("virtualenv -p python%s %s" % (version, pypath))
+        cmd = "virtualenv -p python%s %s" % (version, pypath)
+        print(cmd)
+        os.system(cmd)
 
     adjust_autoenv(pypath)
     if install_pip:
@@ -103,7 +105,7 @@ def set_args(parser):
     )
     parser.add_argument(
         "-i", "--install-pip", action="store_true",
-        help="install packages from `~/.envmgrrc`"
+        help="install packages from `~/.enwrc`"
     )
     parser.add_argument(
         "version", type=float, nargs="?", default=3,
@@ -122,7 +124,7 @@ def run_command(args):
     if isinstance(args, str):
         args = args.split(" ")
 
-    parser = argparse.ArgumentParser(description="envmgr")
+    parser = argparse.ArgumentParser(description="enw")
     set_args(parser)
     args = parser.parse_args(args)
     args.func(**vars(args))

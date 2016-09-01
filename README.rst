@@ -1,7 +1,7 @@
-``envmgr`` - Environment Manager
-================================
+``enw`` - Environment Wrapper
+=============================
 
-``envmgr`` is a wrapper tool for quick creation and switching between different
+``enw`` is a wrapper tool for quick creation and switching between different
 python virtual environments. In particular it allows for:
 
 * Quick creation of new environments using ``virtualenv``.
@@ -13,7 +13,7 @@ python virtual environments. In particular it allows for:
 Obviously, all of this can be done by hand, but the idea is to simplify the
 process that you keep doing many times, and do so in a way that is tractable.
 
-Note that the core functionality of ``envmgr`` adds and replaces what python to
+Note that the core functionality of ``enw`` adds and replaces what python to
 source in ``.env`` files. It does so carefully so that other content that you
 may have added to the file is not affect.
 
@@ -33,11 +33,11 @@ or if on a mac::
 
     echo "source `which activate.sh`" >> ~/.bash_profile
 
-``envmgr`` will install environments, but by default will not activate them. If
+``enw`` will install environments, but by default will not activate them. If
 you want it to also handle activation, you need to add a trigger for
 ``autoenv`` like so::
 
-    echo "alias envmgr=\"envmgr && autoenv_init\"" >> ~/.bash_aliases
+    echo "alias enw=\"enw && autoenv_init\"" >> ~/.bash_aliases
 
 (Make sure that ``.bashrc``/``.bash_profile`` sources the content of
 ``.bash_aliases`` for this to work.)
@@ -47,28 +47,28 @@ Usage
 
 For basic usage, run the basic wrapper::
 
-    envmgr
+    enw
 
 It will create a virtual environment (which default to ``python3``) under the
 folder name ``.py3``. A line sourcing of the file ``.py3/bin/activate`` will be
 placed in a file ``.env``. This will activate the environment everytime you
 enter the folder or one of its subfolders.
 
-In addition, the script will look for the file ``~/.envmgrrc``. It will read
+In addition, the script will look for the file ``~/.enwrc``. It will read
 this file and install its content using ``pip install -r``, using the newly
 installed virtual environment.
 
 If you want to use another python version, this is possible by
 adding a positional version number. For example::
 
-    envmgr 2.7
+    enw 2.7
 
 It will then repeat the whole process, but with the folder ``.py27``.
 
 To switch back to Python 3 setup, just run::
 
-    envmgr 3
+    enw 3
 
 If you *do* want to reinstall an environment, this is also possible::
 
-    envmgr -f 2.7
+    enw -f 2.7
