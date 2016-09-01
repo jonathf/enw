@@ -22,7 +22,7 @@ Installation
 
 To install, run the following outside of any virtual environment::
 
-    python setup.py install
+    pip instal enw
 
 This will install the dependencies ``virtualenv`` and ``autoenv``. The latter
 has to be activated (as normal) by running something like::
@@ -54,21 +54,21 @@ folder name ``.py3``. A line sourcing of the file ``.py3/bin/activate`` will be
 placed in a file ``.env``. This will activate the environment everytime you
 enter the folder or one of its subfolders.
 
-In addition, the script will look for the file ``~/.enwrc``. It will read
-this file and install its content using ``pip install -r``, using the newly
-installed virtual environment.
-
 If you want to use another python version, this is possible by
 adding a positional version number. For example::
 
     enw 2.7
 
-It will then repeat the whole process, but with the folder ``.py27``.
-
-To switch back to Python 3 setup, just run::
+It will then repeat the whole process, but with the folder ``.py27``. To switch
+back to Python 3 setup, just run::
 
     enw 3
 
 If you *do* want to reinstall an environment, this is also possible::
 
     enw -f 2.7
+
+In addition, if if is possible to use ``enw`` to install a suite of standard
+packages. By including a ``-i`` flag, ``enw`` will look for the file
+``~/.enwrc``. If it finds it, it will read this file and install its content
+using ``pip install -r``, using the newly installed virtual environment.

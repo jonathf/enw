@@ -27,7 +27,7 @@ setup(
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Programming Language :: Python :: 3.5',
     ],
-    keywords='virualenv autoenv configuration',
+    keywords='virtualenv autoenv configuration',
     description=\
     "Tool for simple administrating of multiple python virtual environment "\
     "with virtualenv and autoenv.",
