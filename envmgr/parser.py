@@ -59,14 +59,14 @@ def pip_install(pypath):
         os.system(cmd)
 
 
-def run_args(version=3, force=False, skip_install=False, **kwargs):
+def run_args(version=3, force=False, install_pip=False, **kwargs):
     """
     Run main program.
 
     Args:
         version (int, float) : The python version number to one decimal.
         force (bool) : Override old python enviroment if exist.
-        skip_install (bool) : Do not install programs from `~/.envmgrrc`.
+        install_pip (bool) : Install programs with pip from `~/.envmgrrc`.
     """
     # run outside env:
     if os.environ.get("VIRTUAL_ENV", ""):
@@ -86,7 +86,7 @@ def run_args(version=3, force=False, skip_install=False, **kwargs):
         os.system("virtualenv -p python%s %s" % (version, pypath))
 
     adjust_autoenv(pypath)
-    if not skip_install:
+    if install_pip:
         pip_install(pypath)
 
 
@@ -102,8 +102,8 @@ def set_args(parser):
         help="override old envirmonment."
     )
     parser.add_argument(
-        "-I", "--skip-install", action="store_true",
-        help="do not load installes from `~/.envmgrrc`"
+        "-i", "--install-pip", action="store_true",
+        help="install packages from `~/.envmgrrc`"
     )
     parser.add_argument(
         "version", type=float, nargs="?", default=3,
