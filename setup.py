@@ -8,20 +8,28 @@ import sys
 import os
 from setuptools import setup, find_packages
 
-if os.environ.get("VIRTUAL_ENV", ""):
-    print("please install envmgr outside virtual environment.")
-    sys.exit(1)
-
 setup(
     name="envmgr",
     version="0.1",
-    description=\
-    "Tool for autmoatically administrating python virtual environment",
-    author="Jonathan Feinberg",
     packages=find_packages(),
     entry_points={
         'console_scripts': ['envmgr = envmgr.__main__:main']},
     install_requires=[
         "virtualenv", "autoenv"
     ],
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Intended Audience :: Developers',
+        'Topic :: Software Development :: Build Tools',
+        'License :: OSI Approved :: GPL3 License',
+        'Programming Language :: Python :: 3.5',
+    ],
+    keywords='virualenv autoenv configuration',
+    description=\
+    "Tool for simple administrating of multiple python virtual environment "\
+    "with virtualenv and autoenv.",
+    author="Jonathan Feinberg",
+    auther_email="jonathf@gmail.com",
+    license="GPL3",
+    url="https://github.com/jonathf/envmgr",
 )
