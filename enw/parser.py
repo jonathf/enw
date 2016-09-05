@@ -8,7 +8,7 @@ import argparse
 import argcomplete
 import re
 
-RCFILE = os.path.join(".enwrc")
+RCFILE = os.path.join(".enw")
 
 
 def adjust_autoenv(pypath):

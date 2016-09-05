@@ -70,5 +70,6 @@ If you *do* want to reinstall an environment, this is also possible::
 
 In addition, if if is possible to use ``enw`` to install a suite of standard
 packages. By including a ``-i`` flag, ``enw`` will look for the file
-``~/.enwrc``. If it finds it, it will read this file and install its content
-using ``pip install -r``, using the newly installed virtual environment.
+``.enw`` recursivly in the current directory and bellow and install its content
+using ``pip install -r``, using the newly installed virtual environment. Like
+``autoenv`` it will install in order from lowest directories to the highest.
