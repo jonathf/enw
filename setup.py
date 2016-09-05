@@ -4,13 +4,11 @@ Simple script for quick install of virtual environment that places under
 autoenv and initiate a default installation from `.enwrc`.
 """
 
-import sys
-import os
 from setuptools import setup, find_packages
 
 setup(
     name="enw",
-    version="0.1",
+    version="0.2",
     packages=find_packages(),
     entry_points={
         'console_scripts': [
@@ -32,7 +30,7 @@ setup(
     "Tool for simple administrating of multiple python virtual environment "\
     "with virtualenv and autoenv.",
     author="Jonathan Feinberg",
-    auther_email="jonathf@gmail.com",
+    author_email="jonathf@gmail.com",
     license="GPL3",
     url="https://github.com/jonathf/enw",
 )

@@ -8,7 +8,7 @@ import argparse
 import argcomplete
 import re
 
-RCFILE = os.path.join(os.path.expanduser("~"), ".enwrc")
+RCFILE = os.path.join(".enwrc")
 
 
 def adjust_autoenv(pypath):
@@ -54,10 +54,26 @@ def pip_install(pypath):
     print(cmd)
     os.system(cmd)
 
-    if os.path.isfile(RCFILE):
-        cmd = "%s install -r %s" % (pippath, RCFILE)
+    curdir = curdir_saved = os.path.abspath(os.path.curdir)
+    stack = []
+    while True:
+        path = os.path.join(curdir, RCFILE)
+        if os.path.isfile(path):
+            stack.insert(0, path)
+
+        path = os.path.abspath(os.path.join(curdir, os.path.pardir))
+        if curdir == path:
+            break
+        curdir = path
+
+    for rcfile in stack:
+
+        os.chdir(os.path.dirname(rcfile))
+        cmd = "%s install -r %s" % (pippath, rcfile)
         print(cmd)
         os.system(cmd)
+
+    os.chdir(curdir_saved)
 
 
 def run_args(version=3, force=False, install_pip=False, **kwargs):
