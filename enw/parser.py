@@ -69,9 +69,12 @@ def pip_install(pypath):
     for rcfile in stack:
 
         os.chdir(os.path.dirname(rcfile))
-        cmd = "%s install -r %s" % (pippath, rcfile)
-        print(cmd)
-        os.system(cmd)
+        with open(rcfile) as src:
+            lines = src.readlines()
+        for line in lines:
+            cmd = "%s install -r %s" % (pippath, line)
+            print(cmd)
+            os.system(cmd)
 
     os.chdir(curdir_saved)
 
