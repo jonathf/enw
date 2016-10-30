@@ -43,12 +43,12 @@ def adjust_autoenv(pypath):
 
 def pip_install(pypath):
     """
-    Pip install default programs from `.enwrc` file if it exists.
+    Pip install default programs from `.enw` file if it exists.
 
     Args:
         pypath (str) : path to the python virtual enviroment folder.
     """
-    pippath = os.path.join(pypath, "bin", "pip")
+    pippath = os.path.abspath(os.path.join(pypath, "bin", "pip"))
 
     cmd = "%s install -U pip" % pippath
     print(cmd)
@@ -72,7 +72,7 @@ def pip_install(pypath):
         with open(rcfile) as src:
             lines = src.readlines()
         for line in lines:
-            cmd = "%s install -r %s" % (pippath, line)
+            cmd = "%s install %s" % (pippath, line)
             print(cmd)
             os.system(cmd)
 
@@ -86,13 +86,8 @@ def run_args(version=3, force=False, install_pip=False, **kwargs):
     Args:
         version (int, float) : The python version number to one decimal.
         force (bool) : Override old python enviroment if exist.
-        install_pip (bool) : Install programs with pip from `~/.enwrc`.
+        install_pip (bool) : Install programs with pip from `~/.enw`.
     """
-    # run outside env:
-    if os.environ.get("VIRTUAL_ENV", ""):
-        os.system("deactivate && " + " ".join(sys.argv))
-        sys.exit(0)
-
     if version == int(version):
         version = "%d" % version
     else:
@@ -125,7 +120,7 @@ def set_args(parser):
     )
     parser.add_argument(
         "-i", "--install-pip", action="store_true",
-        help="install packages from `~/.enwrc`"
+        help="install packages from `~/.enw`"
     )
     parser.add_argument(
         "version", type=float, nargs="?", default=3,
