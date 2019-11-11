@@ -37,7 +37,7 @@ or if on a mac::
 you want it to also handle activation, you need to add a trigger for
 ``autoenv`` like so::
 
-    echo "function enw(){ envwrapper "$@";autoenv_init; }" >> ~/.bash_aliases
+    echo "function enw(){ envwrap "$@";autoenv_init; }" >> ~/.bash_aliases
 
 (Make sure that ``.bashrc``/``.bash_profile`` sources the content of
 ``.bash_aliases`` for this to work.)
